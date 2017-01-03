@@ -1,0 +1,8 @@
+<DBConfigs>
+	<DBConfig>
+		<ip>localhost</ip>
+		<port>3306</port>
+		<username>root</username>
+		<password>root</password>
+	</DBConfig>
+</DBConfigs>
