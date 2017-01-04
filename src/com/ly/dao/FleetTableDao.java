@@ -128,11 +128,6 @@ public class FleetTableDao {
 	}
 	
 	/*
-	 * 查询待录入数据
-	 */
-
-	
-	/*
 	 * 查询待审核数据条数
 	 */
 	public int getCountOfCheckPendFleetTableBean(){
@@ -152,6 +147,65 @@ public class FleetTableDao {
 		}
 		return count;
 	}
+	
+	/*
+	 * 查询已审核数据
+	 */
+	public List getCheckPassFleetTableBean(){
+		String sql = "SELECT * FROM fleet_table a WHERE a.flag = 1";
+		String[] parameters = {};
+		ResultSet rs;
+		List<FleetTableBean> List = new ArrayList<FleetTableBean>();
+		try {
+			rs = MySqlUtil.executeQuery(sql, parameters);
+			while(rs.next()){
+				FleetTableBean fleetTableBean = new FleetTableBean();
+				fleetTableBean.setId(rs.getInt("id"));
+				fleetTableBean.setCarid(rs.getString("carid"));
+				fleetTableBean.setCarincome(rs.getInt("carincome"));
+				fleetTableBean.setDriver(rs.getString("driver"));
+				fleetTableBean.setDrivingcost(rs.getInt("drivingcost"));
+				fleetTableBean.setEnddate(rs.getString("enddate"));
+				fleetTableBean.setFlag(rs.getInt("flag"));
+				fleetTableBean.setIdealguarantee(rs.getInt("idealguarantee"));
+				fleetTableBean.setIdealincome(rs.getInt("idealincome"));
+				fleetTableBean.setNetpay(rs.getInt("netpay"));
+				fleetTableBean.setNetprofit(rs.getInt("netprofit"));
+				fleetTableBean.setOther(rs.getString("other"));
+				fleetTableBean.setPetrolcost(rs.getInt("petrolcost"));
+				fleetTableBean.setRealguarantee(rs.getInt("realguarantee"));
+				fleetTableBean.setRealincome(rs.getInt("realincome"));
+				fleetTableBean.setRebate(rs.getInt("rebate"));
+				fleetTableBean.setStartdate(rs.getString("startdate"));
+				fleetTableBean.setTeamtype(rs.getString("teamtype"));
+				fleetTableBean.setTrip(rs.getString("trip"));
+				List.add(fleetTableBean);
+				fleetTableBean = null;//gc
+			}
+		} catch (Exception e) {	
+			throw new RuntimeException(e.getMessage());
+		}finally{
+			MySqlUtil.close(MySqlUtil.getRs(), MySqlUtil.getPs(), MySqlUtil.getCt());
+		}
+		return List;
+	}
+	/*
+	 * 审核通过
+	 */
+	public void checkPass(int id){
+		String sql = "UPDATE fleet_table t SET t.flag = 1 WHERE t.id="+id;
+		String[] parameters = {};
+		try {
+			MySqlUtil.executeUpdate(sql, parameters);
+		} catch (Exception e) {	
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	/*
+	 * 查询待录入数据
+	 */
+
 	
 	/*
 	 * 查询待录入数据条数

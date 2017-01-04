@@ -8,10 +8,13 @@ package com.ly.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import com.ly.bean.FleetTableBean;
+import com.ly.bean.InputFleetTableBean;
 import com.ly.bean.User;
 import com.ly.service.FleetTableSV;
 import com.ly.util.DateChooser;
@@ -749,6 +752,48 @@ public class InputFrm extends javax.swing.JInternalFrame {
 	}// </editor-fold>
 	//GEN-END:initComponents
 
+	public List checkInputFleetTableBean(){
+		FleetTableSV fleetTableSV = new FleetTableSV();
+		InputFleetTableBean inputFleetTable = new InputFleetTableBean();
+		/*得到用户传入的数据，为空则将其赋值为“-1”*/
+		String carid = fleetTableSV.checkInputField(caridTextField.getText());
+		String carincome = fleetTableSV.checkInputField(carincomeTextField.getText());
+		String driver = fleetTableSV.checkInputField(driverTextField.getText());
+		String drivingcost = fleetTableSV.checkInputField(drivingcostTextField.getText());
+		String enddate = fleetTableSV.checkInputField(enddateTextField.getText());
+		String idealguarantee = fleetTableSV.checkInputField(idealguaranteeTextField.getText());
+		String idealincome = fleetTableSV.checkInputField(idealincomeTextField.getText());
+		String netpay = fleetTableSV.checkInputField(netpayTextField.getText());
+		String netprofit = fleetTableSV.checkInputField(netprofitTextField.getText());
+		String other = fleetTableSV.checkInputField(otherTextField.getText());
+		String petrolcost = fleetTableSV.checkInputField(petrolcostTextField.getText());
+		String realguarantee = fleetTableSV.checkInputField(realguaranteeTextField.getText());
+		String realincome = fleetTableSV.checkInputField(realincomeTextField.getText());
+		String rebate = fleetTableSV.checkInputField(rebateTextField.getText());
+		String startdate = fleetTableSV.checkInputField(startdateTextField.getText());
+		String teamtype = fleetTableSV.checkInputField(teamtypeTextField.getText());
+		String trip = fleetTableSV.checkInputField(tripTextField.getText());
+		/******************拼装待检测的bean*********************/
+		inputFleetTable.setCarid(carid);
+		inputFleetTable.setCarincome(carincome);
+		inputFleetTable.setDriver(driver);
+		inputFleetTable.setDrivingcost(drivingcost);
+		inputFleetTable.setEnddate(enddate);
+		inputFleetTable.setIdealguarantee(idealguarantee);
+		inputFleetTable.setIdealincome(idealincome);
+		inputFleetTable.setNetpay(netpay);
+		inputFleetTable.setNetprofit(netprofit);
+		inputFleetTable.setOther(other);
+		inputFleetTable.setPetrolcost(petrolcost);
+		inputFleetTable.setPetrolcost(petrolcost);
+		inputFleetTable.setRealguarantee(realguarantee);
+		inputFleetTable.setRealincome(realincome);
+		inputFleetTable.setRebate(rebate);
+		inputFleetTable.setStartdate(startdate);
+		inputFleetTable.setTeamtype(teamtype);
+		inputFleetTable.setTrip(trip);
+		return fleetTableSV.checkInputFleetTableBean(inputFleetTable);
+	}
 	private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		/*调用service层*/
 		FleetTableSV fleetTableSV = new FleetTableSV();
@@ -770,42 +815,56 @@ public class InputFrm extends javax.swing.JInternalFrame {
 		String startdate = fleetTableSV.checkInputField(startdateTextField.getText());
 		String teamtype = fleetTableSV.checkInputField(teamtypeTextField.getText());
 		String trip = fleetTableSV.checkInputField(tripTextField.getText());
-		/*拼装bean*/
-		FleetTableBean fleetTableBean = new FleetTableBean();
-		fleetTableBean.setCarid(carid);
-		fleetTableBean.setCarincome(Integer.parseInt(carincome));
-		fleetTableBean.setDriver(driver);
-		fleetTableBean.setDrivingcost(Integer.parseInt(drivingcost));
-		fleetTableBean.setEnddate(enddate);
-		fleetTableBean.setFlag(0);
-		fleetTableBean.setIdealguarantee(Integer.parseInt(idealguarantee));
-		fleetTableBean.setIdealincome(Integer.parseInt(idealincome));
-		fleetTableBean.setNetpay(Integer.parseInt(netpay));
-		fleetTableBean.setNetprofit(Integer.parseInt(netprofit));
-		fleetTableBean.setOther(other);
-		fleetTableBean.setPetrolcost(Integer.parseInt(petrolcost));
-		fleetTableBean.setRealguarantee(Integer.parseInt(realguarantee));
-		fleetTableBean.setRealincome(Integer.parseInt(realincome));
-		fleetTableBean.setRebate(Integer.parseInt(rebate));
-		fleetTableBean.setStartdate(startdate);
-		fleetTableBean.setTeamtype(teamtype);
-		fleetTableBean.setTrip(trip);
-		
-		if("update".equals(actionFlag)){
-			try{
-				fleetTableSV.update(newFleetTableBean);
-			}catch(Exception e){
-				JOptionPane.showMessageDialog(null, "更新失败", "更新失败", 0);
+		/*检测输入数据是否合法*/
+		List list = this.checkInputFleetTableBean();
+		if(list.size()==0){
+			//输入是合法的
+			/*拼装bean*/
+			FleetTableBean fleetTableBean = new FleetTableBean();
+			fleetTableBean.setCarid(carid);
+			fleetTableBean.setCarincome(Integer.parseInt(carincome));
+			fleetTableBean.setDriver(driver);
+			fleetTableBean.setDrivingcost(Integer.parseInt(drivingcost));
+			fleetTableBean.setEnddate(enddate);
+			fleetTableBean.setFlag(0);
+			fleetTableBean.setIdealguarantee(Integer.parseInt(idealguarantee));
+			fleetTableBean.setIdealincome(Integer.parseInt(idealincome));
+			fleetTableBean.setNetpay(Integer.parseInt(netpay));
+			fleetTableBean.setNetprofit(Integer.parseInt(netprofit));
+			fleetTableBean.setOther(other);
+			fleetTableBean.setPetrolcost(Integer.parseInt(petrolcost));
+			fleetTableBean.setRealguarantee(Integer.parseInt(realguarantee));
+			fleetTableBean.setRealincome(Integer.parseInt(realincome));
+			fleetTableBean.setRebate(Integer.parseInt(rebate));
+			fleetTableBean.setStartdate(startdate);
+			fleetTableBean.setTeamtype(teamtype);
+			fleetTableBean.setTrip(trip);
+			
+			if("update".equals(actionFlag)){
+				try{
+					fleetTableSV.update(newFleetTableBean);
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null, "更新失败", "更新失败", 0);
+				}
+				JOptionPane.showMessageDialog(null, "更新成功", "更新成功", 0);
+			}else{
+				try{
+					fleetTableSV.save(fleetTableBean);
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null, "保存失败", "保存失败", 0);
+				}
+				JOptionPane.showMessageDialog(null, "保存成功", "保存成功", 0);
 			}
-			JOptionPane.showMessageDialog(null, "更新成功", "更新成功", 0);
 		}else{
-			try{
-				fleetTableSV.save(fleetTableBean);
-			}catch(Exception e){
-				JOptionPane.showMessageDialog(null, "保存失败", "保存失败", 0);
+			//输入不合法
+			StringBuffer errStr = new StringBuffer();
+			Iterator<List> it = list.iterator();
+			while(it.hasNext()){
+				errStr.append(it.next()).append("\n");
 			}
-			JOptionPane.showMessageDialog(null, "保存成功", "保存成功", 0);
+			JOptionPane.showMessageDialog(null, errStr.toString(),"输入数据不合法", 0);
 		}
+		
 		
 	}
 

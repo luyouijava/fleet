@@ -29,19 +29,23 @@ import com.ly.service.FleetTableSV;
  */
 public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 	private User loginUser;
+
 	/** Creates new form SearchFleetTableFrm */
 	public SearchFleetTableFrm() {
 		initComponents();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation((dim.width - this.getWidth()) / 2,(dim.height - this.getHeight()) / 2);
+		this.setLocation((dim.width - this.getWidth()) / 2, (dim.height - this
+				.getHeight()) / 2);
 	}
-	
+
 	public SearchFleetTableFrm(User loginUser) {
 		this.loginUser = loginUser;
 		initComponents();
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation((dim.width - this.getWidth()) / 2,(dim.height - this.getHeight()) / 2);
+		this.setLocation((dim.width - this.getWidth()) / 2, (dim.height - this
+				.getHeight()) / 2);
 	}
+
 	/** This method is called from within the constructor to
 	 * initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is
@@ -59,6 +63,9 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 		searchButton = new javax.swing.JButton();
 		editButton = new javax.swing.JButton();
 		confirmButton = new javax.swing.JButton();
+		checkPendButton = new javax.swing.JButton();
+		checkPassButton = new javax.swing.JButton();
+		notInputButton = new javax.swing.JButton();
 
 		setClosable(true);
 		setIconifiable(true);
@@ -73,10 +80,6 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 				}, new String[] { "id", "车号", "出发日期", "结束日期", "司机", "行程",
 						"团队性质", "车费", "网付", "现收", "实际现收", "保底", "实收保底", "公司加油",
 						"行车费用", "返利", "净利润", "其他", "flag" }) {
-			/**
-							 * 
-							 */
-							private static final long serialVersionUID = 1L;
 			Class[] types = new Class[] { java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
@@ -110,7 +113,7 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 			}
 		});
 
-		searchButton.setText("\u67e5\u8be2");
+		searchButton.setText("\u67e5\u8be2\u5168\u90e8");
 		searchButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				searchButtonActionPerformed(evt);
@@ -126,6 +129,22 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 
 		confirmButton.setText("\u786e\u5b9a");
 
+		checkPendButton.setText("\u5f85\u5ba1\u6838\u6570\u636e");
+		checkPendButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				checkPendButtonActionPerformed(evt);
+			}
+		});
+
+		checkPassButton.setText("\u5df2\u5ba1\u6838\u6570\u636e");
+		checkPassButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				checkPassButtonActionPerformed(evt);
+			}
+		});
+
+		notInputButton.setText("\u5f85\u5f55\u5165\u6570\u636e");
+
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
 		getContentPane().setLayout(layout);
@@ -134,28 +153,69 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 						.createParallelGroup(
 								javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
+								javax.swing.GroupLayout.Alignment.TRAILING,
+								layout.createSequentialGroup()
+										.addContainerGap().addComponent(
+												editButton).addGap(53, 53, 53)
+										.addComponent(confirmButton).addGap(24,
+												24, 24))
+						.addGroup(
 								layout
 										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(
+												jSeparator1,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												944, Short.MAX_VALUE)
+										.addContainerGap())
+						.addGroup(
+								layout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(
+												jScrollPane1,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												944, Short.MAX_VALUE)
+										.addContainerGap())
+						.addGroup(
+								layout
+										.createSequentialGroup()
+										.addGap(47, 47, 47)
 										.addGroup(
 												layout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.LEADING)
 														.addGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING,
 																layout
 																		.createSequentialGroup()
-																		.addContainerGap()
 																		.addComponent(
-																				jSeparator1,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				944,
-																				Short.MAX_VALUE))
+																				notInputButton)
+																		.addGap(
+																				80,
+																				80,
+																				80)
+																		.addComponent(
+																				checkPassButton)
+																		.addGap(
+																				85,
+																				85,
+																				85)
+																		.addComponent(
+																				checkPendButton)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				66,
+																				Short.MAX_VALUE)
+																		.addComponent(
+																				searchButton)
+																		.addGap(
+																				330,
+																				330,
+																				330))
 														.addGroup(
 																layout
 																		.createSequentialGroup()
-																		.addGap(
-																				47,
-																				47,
-																				47)
 																		.addComponent(
 																				jLabel1)
 																		.addPreferredGap(
@@ -164,39 +224,8 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 																				caridCond,
 																				javax.swing.GroupLayout.PREFERRED_SIZE,
 																				60,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap())
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								layout.createSequentialGroup().addContainerGap(
-										579, Short.MAX_VALUE).addComponent(
-										searchButton).addGap(332, 332, 332))
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								layout
-										.createSequentialGroup()
-										.addGroup(
-												layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addGroup(
-																layout
-																		.createSequentialGroup()
-																		.addContainerGap()
-																		.addComponent(
-																				editButton)
-																		.addGap(
-																				53,
-																				53,
-																				53)
-																		.addComponent(
-																				confirmButton))
-														.addComponent(
-																jScrollPane1,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																944,
-																Short.MAX_VALUE))
-										.addGap(24, 24, 24)));
+																				javax.swing.GroupLayout.PREFERRED_SIZE)
+																		.addContainerGap()))));
 		layout
 				.setVerticalGroup(layout
 						.createParallelGroup(
@@ -215,14 +244,24 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 																javax.swing.GroupLayout.PREFERRED_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addGap(81, 81, 81)
-										.addComponent(searchButton)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGap(23, 23, 23)
+										.addGroup(
+												layout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																searchButton)
+														.addComponent(
+																notInputButton)
+														.addComponent(
+																checkPassButton)
+														.addComponent(
+																checkPendButton))
+										.addGap(18, 18, 18)
 										.addComponent(
 												jSeparator1,
 												javax.swing.GroupLayout.PREFERRED_SIZE,
-												13,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,8 +270,7 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 												javax.swing.GroupLayout.PREFERRED_SIZE,
 												295,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										.addGap(73, 73, 73)
 										.addGroup(
 												layout
 														.createParallelGroup(
@@ -241,53 +279,95 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 																confirmButton)
 														.addComponent(
 																editButton))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+										.addContainerGap(34, Short.MAX_VALUE)));
 
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
+
+	private void checkPassButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		FleetTableSV fleetTableSV = new FleetTableSV();
+		List list = fleetTableSV.getCheckPassFleetTableBean();
+		this.fillTable(list);
+	}
+
+	private void checkPendButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		FleetTableSV fleetTableSV = new FleetTableSV();
+		List list = fleetTableSV.getCheckPendFleetTableBean();
+		this.fillTable(list);
+	}
 
 	private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		int row = resultTable.getSelectedRow();
 		String actionFlag = "update";
 		FleetTableBean fleetTableBean = new FleetTableBean();
 		FleetTableSV fleetTableSV = new FleetTableSV();
-		if(row == -1){
+		if (row == -1) {
 			//未选中任何行
 			JOptionPane.showMessageDialog(null, "请选择一行数据", "错误", 0);
-		}else{
-			fleetTableBean.setId(Integer.valueOf((String) resultTable.getValueAt(row, 0)));
-			fleetTableBean.setCarid(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 1)));
-			fleetTableBean.setStartdate(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 2)));
-			fleetTableBean.setEnddate(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 3)));
-			fleetTableBean.setDriver(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 4)));
-			fleetTableBean.setTrip(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 5)));
-			fleetTableBean.setTeamtype(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 6)));
-			fleetTableBean.setCarincome(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 7))));
-			fleetTableBean.setNetpay(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 8))));
-			fleetTableBean.setIdealincome(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 9))));
-			fleetTableBean.setRealincome(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 10))));
-			fleetTableBean.setIdealguarantee(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 11))));
-			fleetTableBean.setRealguarantee(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 12))));
-			fleetTableBean.setPetrolcost(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 13))));
-			fleetTableBean.setDrivingcost(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 14))));
-			fleetTableBean.setRebate(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 15))));
-			fleetTableBean.setNetprofit(Integer.parseInt(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 16))));
-			fleetTableBean.setOther(fleetTableSV.checkInputField((String)resultTable.getValueAt(row, 17)));
-			String flag = (String)resultTable.getValueAt(row, 18);
-			if("已审核".equals(flag)){
+		} else {
+			fleetTableBean.setId(Integer.valueOf((String) resultTable
+					.getValueAt(row, 0)));
+			fleetTableBean.setCarid(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 1)));
+			fleetTableBean.setStartdate(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 2)));
+			fleetTableBean.setEnddate(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 3)));
+			fleetTableBean.setDriver(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 4)));
+			fleetTableBean.setTrip(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 5)));
+			fleetTableBean.setTeamtype(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 6)));
+			fleetTableBean.setCarincome(Integer.parseInt(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 7))));
+			fleetTableBean.setNetpay(Integer.parseInt(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 8))));
+			fleetTableBean.setIdealincome(Integer.parseInt(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 9))));
+			fleetTableBean
+					.setRealincome(Integer.parseInt(fleetTableSV
+							.checkInputField((String) resultTable.getValueAt(
+									row, 10))));
+			fleetTableBean
+					.setIdealguarantee(Integer.parseInt(fleetTableSV
+							.checkInputField((String) resultTable.getValueAt(
+									row, 11))));
+			fleetTableBean
+					.setRealguarantee(Integer.parseInt(fleetTableSV
+							.checkInputField((String) resultTable.getValueAt(
+									row, 12))));
+			fleetTableBean
+					.setPetrolcost(Integer.parseInt(fleetTableSV
+							.checkInputField((String) resultTable.getValueAt(
+									row, 13))));
+			fleetTableBean
+					.setDrivingcost(Integer.parseInt(fleetTableSV
+							.checkInputField((String) resultTable.getValueAt(
+									row, 14))));
+			fleetTableBean
+					.setRebate(Integer.parseInt(fleetTableSV
+							.checkInputField((String) resultTable.getValueAt(
+									row, 15))));
+			fleetTableBean
+					.setNetprofit(Integer.parseInt(fleetTableSV
+							.checkInputField((String) resultTable.getValueAt(
+									row, 16))));
+			fleetTableBean.setOther(fleetTableSV
+					.checkInputField((String) resultTable.getValueAt(row, 17)));
+			String flag = (String) resultTable.getValueAt(row, 18);
+			if ("已审核".equals(flag)) {
 				fleetTableBean.setFlag(1);
-			}else{
+			} else {
 				fleetTableBean.setFlag(0);
 			}
-			EditFrm EditFrm = new EditFrm(loginUser,fleetTableBean,actionFlag);
+			EditFrm EditFrm = new EditFrm(loginUser, fleetTableBean, actionFlag);
 			MainFrm.getTable().add(EditFrm);
 			EditFrm.setVisible(true);
-			
+
 		}
-		
+
 	}
 
 	private void fillTable(List list) {
@@ -300,30 +380,45 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 			FleetTableBean fleetTableBean = it.next();
 			rowVector.add(fleetTableSV.show2User(fleetTableBean.getId() + ""));
 			rowVector.add(fleetTableSV.show2User(fleetTableBean.getCarid()));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getStartdate()));
+			rowVector
+					.add(fleetTableSV.show2User(fleetTableBean.getStartdate()));
 			rowVector.add(fleetTableSV.show2User(fleetTableBean.getEnddate()));
 			rowVector.add(fleetTableSV.show2User(fleetTableBean.getDriver()));
 			rowVector.add(fleetTableSV.show2User(fleetTableBean.getTrip()));
 			rowVector.add(fleetTableSV.show2User(fleetTableBean.getTeamtype()));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getCarincome() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getNetpay() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getIdealincome() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getRealincome() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getIdealguarantee() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getRealguarantee() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getPetrolcost() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getDrivingcost() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getRebate() + ""));
-			rowVector.add(fleetTableSV.show2User(fleetTableBean.getNetprofit() + ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean.getCarincome()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean.getNetpay()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean
+					.getIdealincome()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean.getRealincome()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean
+					.getIdealguarantee()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean
+					.getRealguarantee()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean.getPetrolcost()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean
+					.getDrivingcost()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean.getRebate()
+					+ ""));
+			rowVector.add(fleetTableSV.show2User(fleetTableBean.getNetprofit()
+					+ ""));
 			rowVector.add(fleetTableSV.show2User(fleetTableBean.getOther()));
-			if(fleetTableBean.getFlag() == 0){
+			if (fleetTableBean.getFlag() == 0) {
 				rowVector.add("待审核");
-			}else if(fleetTableBean.getFlag() == 1){
+			} else if (fleetTableBean.getFlag() == 1) {
 				rowVector.add("已审核");
-			}else{
+			} else {
 				rowVector.add("");
 			}
-			
+
 			dtm.addRow(rowVector);
 			rowVector = null;//gc
 		}
@@ -343,11 +438,14 @@ public class SearchFleetTableFrm extends javax.swing.JInternalFrame {
 	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
 	private javax.swing.JTextField caridCond;
+	private javax.swing.JButton checkPassButton;
+	private javax.swing.JButton checkPendButton;
 	private javax.swing.JButton confirmButton;
 	private javax.swing.JButton editButton;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JSeparator jSeparator1;
+	private javax.swing.JButton notInputButton;
 	private javax.swing.JTable resultTable;
 	private javax.swing.JButton searchButton;
 	// End of variables declaration//GEN-END:variables

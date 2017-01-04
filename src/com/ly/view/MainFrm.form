@@ -67,6 +67,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x5f85;&#x5ba1;&#x6838;&#x6570;&#x636e;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkPendingMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

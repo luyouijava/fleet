@@ -9,9 +9,11 @@ package com.ly.view;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 
 import com.ly.bean.User;
+import com.ly.service.FleetTableSV;
 
 /**
  *
@@ -21,6 +23,7 @@ public class MainFrm extends javax.swing.JFrame {
 
 	private User loginUser;
 	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
 	/** Creates new form MainFrm */
 	public MainFrm() {
 		initComponents();
@@ -79,9 +82,20 @@ public class MainFrm extends javax.swing.JFrame {
 		jMenuBar1.add(jMenu3);
 
 		jMenu4.setText("\u67e5\u8be2");
+		jMenu4.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				try {
+					searchMenuActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 
 		searchMenuItem.setText("\u67e5\u8be2\u6570\u636e");
-		searchMenuItem.addActionListener(new java.awt.event.ActionListener() {
+		searchMenuItem
+		.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
 					searchMenuItemActionPerformed(evt);
@@ -92,13 +106,25 @@ public class MainFrm extends javax.swing.JFrame {
 			}
 		});
 		jMenu4.add(searchMenuItem);
+		
 
 		checkInputMenuItem.setText("\u5f85\u5f55\u5165\u6570\u636e");
 		jMenu4.add(checkInputMenuItem);
 
 		checkPendingMenuItem.setText("\u5f85\u5ba1\u6838\u6570\u636e");
+		checkPendingMenuItem
+				.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						try {
+							checkPendingMenuItemActionPerformed(evt);
+						} catch (PropertyVetoException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
 		jMenu4.add(checkPendingMenuItem);
-		if ("后勤".equals(loginUser.getLevel())){
+		if("后勤".equals(loginUser.getLevel())){
 			checkPendingMenuItem.setVisible(false);
 		}
 		jMenuBar1.add(jMenu4);
@@ -119,14 +145,23 @@ public class MainFrm extends javax.swing.JFrame {
 						.addContainerGap(57, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout.createParallelGroup(
 				org.jdesktop.layout.GroupLayout.LEADING).add(table,
-				org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 650,
+				org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 600,
 				org.jdesktop.layout.GroupLayout.PREFERRED_SIZE));
 
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
 
-	private void searchMenuItemActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {
+	private void checkPendingMenuItemActionPerformed(
+			java.awt.event.ActionEvent evt) throws PropertyVetoException {
+		ShowCheckPendFrm showCheckPendFrm = new ShowCheckPendFrm();
+		this.getTable().add(showCheckPendFrm);
+		showCheckPendFrm.setMaximum(true);
+		showCheckPendFrm.setVisible(true);
+	}
+
+	private void searchMenuItemActionPerformed(java.awt.event.ActionEvent evt)
+			throws PropertyVetoException {
 		if ("主管".equals(loginUser.getLevel())) {
 			SearchFleetTableFrm searchFleetTableFrm = new SearchFleetTableFrm(
 					loginUser);
@@ -143,6 +178,12 @@ public class MainFrm extends javax.swing.JFrame {
 
 	}
 
+	private void searchMenuActionPerformed(ActionEvent evt) {
+		FleetTableSV fleetTableSV = new FleetTableSV();
+		int count = fleetTableSV.getCountOfCheckPendFleetTableBean();
+		checkPendingMenuItem.setText("待审核数据（"+count+"）");
+	}
+	
 	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
 		InputFrm inputFrm = new InputFrm(loginUser);
 		this.table.add(inputFrm);
